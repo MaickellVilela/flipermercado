@@ -1,29 +1,22 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
-import { Header, ListItem } from 'react-native-elements'
-import axios from 'axios'
-
-import config from './config'
+import { fetchUsers, fetchProducts } from './helpers/actions'
 
 export default class Home extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { persons: [], products: [] }
+    this.state = { users: [], products: [] }
   }
-  componentDidMount() {
-    axios.post(config.googleScriptURL + '?action=list_users')
-      .then(res => {
-        const persons = res.data
-        this.setState({ persons })
-      })
 
-    axios.post(config.googleScriptURL + '?action=list_products')
-      .then(res => {
-        const products = res.data
-        this.setState({ products })
-      })
+  async componentDidMount() {
+    const { users } = await fetchUsers()
+
+    const { products } = await fetchProducts()
+
+    this.setState({ users, products })
   }
 
   keyExtractor = (item, index) => index.toString()
@@ -45,7 +38,7 @@ export default class Home extends Component {
     return (
       <FlatList
         keyExtractor={this.keyExtractor}
-        data={this.state.persons}
+        data={this.state.users}
         renderItem={this.renderItem}
       />
     )
