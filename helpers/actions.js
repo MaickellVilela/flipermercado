@@ -30,7 +30,7 @@ export const createTransaction = async ({ payload }) => {
 
     return { success: data }
   } catch (error) {
-    window.alert(error)
+    console.error(error)
 
     return { succcess: false }
   }
