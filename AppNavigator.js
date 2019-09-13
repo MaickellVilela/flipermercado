@@ -5,7 +5,7 @@ import { Header } from 'react-native-elements'
 
 import Home from './Home'
 import ProductList from './ProductList'
-import Confirmation from './Confirmation'
+import Confirmation from './components/confirmation'
 
 const AppNavigator = createStackNavigator(
   {
