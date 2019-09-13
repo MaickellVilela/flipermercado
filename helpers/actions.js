@@ -23,3 +23,15 @@ export const fetchProducts = async () => {
     return { products: [] }
   }
 }
+
+export const createTransaction = async ({ payload }) => {
+  try {
+    const { data } = await post({ action: 'create_transaction', payload })
+
+    return { success: data }
+  } catch (error) {
+    window.alert(error)
+
+    return { succcess: false }
+  }
+}
