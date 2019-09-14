@@ -24,14 +24,5 @@ export const fetchProducts = async () => {
   }
 }
 
-export const createTransaction = async ({ payload }) => {
-  try {
-    const { data } = await post({ action: 'create_transaction', payload })
-
-    return { success: data }
-  } catch (error) {
-    console.error(error)
-
-    return { succcess: false }
-  }
-}
+export const createTransaction = payload =>
+  post({ action: 'create_transaction', payload})
