@@ -23,3 +23,6 @@ export const fetchProducts = async () => {
     return { products: [] }
   }
 }
+
+export const createTransaction = payload =>
+  post({ action: 'create_transaction', payload})
