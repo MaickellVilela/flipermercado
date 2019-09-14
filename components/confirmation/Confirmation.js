@@ -10,50 +10,55 @@ export default class Confirmation extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { isActivityIndicatorAnimating: false }
+    this.state = {
+      isActivityIndicatorAnimating: false,
+    }
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props
+
+    const user = navigation.getParam('userName')
+    const product = navigation.getParam('productName')
+    const price = navigation.getParam('productPrice')
+
+    this.setState({ user, product, price })
+  }
+
+  handleConfirm = async () => {
+    this.setState({ isActivityIndicatorAnimating: true })
+
+    try {
+      await createTransaction({
+        created_at: currentDate(),
+        user: this.state.user,
+        product: this.state.product,
+        price: this.state.price,
+      })
+
+      Alert.alert(`Compra efetuada.\nObrigado, ${this.state.user}! 🥳`)
+    } catch (error) {
+      Alert.alert(`Ocorreu um erro ao confirmar a compra. 🤕`)
+    } finally {
+      this.setState({ isActivityIndicatorAnimating: false })
+
+      this.props.navigation.popToTop()
+    }
   }
 
   render() {
-    const { navigation } = this.props
-
-    const userName = navigation.getParam('userName')
-    const productName = navigation.getParam('productName')
-    const productPrice = navigation.getParam('productPrice')
-
-    const handleConfirm = async () => {
-      this.setState({ isActivityIndicatorAnimating: true })
-
-      try {
-        await createTransaction({
-          payload: {
-            created_at: currentDate(),
-            user: userName,
-            product: productName,
-            price: productPrice,
-          }
-        })
-
-        Alert.alert(`Compra efetuada.\nObrigado, ${userName}! 🥳`)
-      } catch (error) {
-        Alert.alert(`Ocorreu um erro ao confirmar a compra. 🤕`)
-
-        console.error(error)
-      } finally {
-        this.setState({ isActivityIndicatorAnimating: false })
-
-        this.props.navigation.popToTop()
-      }
-    }
-
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <Text>{ userName }</Text>
-          <Text>{ productName }</Text>
-          <Text>{ productPrice }</Text>
+          <Text>{ this.state.user }</Text>
+          <Text>{ this.state.product }</Text>
+          <Text>{ this.state.price }</Text>
         </ScrollView>
-        <View style={ styles.whiteOverlay }>
-          <ActivityIndicator animating={ this.state.isActivityIndicatorAnimating } size='large' />
+        <View style={styles.whiteOverlay}>
+          <ActivityIndicator
+            animating={this.state.isActivityIndicatorAnimating}
+            size='large'
+          />
         </View>
         <View>
           <Button
@@ -64,7 +69,7 @@ export default class Confirmation extends Component {
 
           <Button
             title="Confirmar"
-            onPress={ handleConfirm }
+            onPress={this.handleConfirm}
           />
         </View>
       </View>
