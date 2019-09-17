@@ -23,7 +23,7 @@ Create config file
 cp config.sample.js config.js
 ```
 
-And inside on `./config.js` change the `googleScriptURL` value to a valid google sheets script link.
+Open `./config.js` file and change the `googleScriptURL` value to a valid google sheets script link.
 
 
 [Sample script]
@@ -36,7 +36,7 @@ And inside on `./config.js` change the `googleScriptURL` value to a valid google
 npm install -g expo-cli
 ```
 
-#### Loign with a existent [account](https://expo.io/)
+#### Login with an existent [account](https://expo.io/)
 
 ```
 expo login
@@ -64,13 +64,13 @@ git remote add upstream git@github.com:izn/flipermercado.git
 git fetch upstream
 ```
 
-#### Checkout to master
+#### Checkout to Master
 
 ```sh
 git checkout master
 ```
 
-#### Merge your local master with updated `upstream`
+#### Merge your local master with updated `upstream` master
 
 ```sh
 git merge upstream/master
