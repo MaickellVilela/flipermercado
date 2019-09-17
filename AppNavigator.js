@@ -3,8 +3,7 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 
 import Home from './Home'
-import ProductList from './ProductList'
-import Confirmation from './components/confirmation'
+import { Confirmation, ProductList } from './components'
 
 const AppNavigator = createStackNavigator(
   {
