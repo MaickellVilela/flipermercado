@@ -52,7 +52,7 @@ yarn start
 
 ### Sync with upstream
 
-#### Create `upstream` and set remore
+#### Create `upstream` and set remote
 
 ```sh
 git remote add upstream git@github.com:izn/flipermercado.git
