@@ -23,7 +23,7 @@ Create config file
 cp config.sample.js config.js
 ```
 
-Open `./config.js` file and change the `googleScriptURL` value to a valid google sheets script link.
+Open `./config.js` file and change the `googleScriptURL` value to a valid Google Script API link.
 
 
 [Sample script]
