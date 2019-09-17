@@ -74,10 +74,9 @@ export default class Confirmation extends Component {
         />
 
         <View style={styles.whiteOverlay}>
-          <ActivityIndicator
-            animating={this.state.isActivityIndicatorAnimating}
-            size='large'
-          />
+          { this.state.isActivityIndicatorAnimating &&
+            ( <ActivityIndicator animating size='large' /> )
+          }
         </View>
 
         <View>
