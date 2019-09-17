@@ -59,7 +59,7 @@ export default class Confirmation extends Component {
       title={item.product}
       subtitle={item.price.toString()}
     />
-  );
+  )
 
   render() {
     const { data } = this.state
