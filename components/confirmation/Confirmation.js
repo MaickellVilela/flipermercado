@@ -4,6 +4,7 @@ import { Button, ListItem } from 'react-native-elements'
 
 import { createTransaction } from '../../helpers/actions'
 import { currentDate } from '../../helpers/time'
+import { parsePrice } from '../../helpers/currency'
 import styles from './styles'
 
 export default class Confirmation extends Component {
@@ -16,7 +17,7 @@ export default class Confirmation extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { navigation } = this.props
 
     const user = navigation.getParam('userName')
@@ -56,8 +57,8 @@ export default class Confirmation extends Component {
 
   renderItem = ({ item }) => (
     <ListItem
-      title={item.product}
-      subtitle={item.price.toString()}
+      title={ item.product }
+      subtitle={ parsePrice(item.price) }
     />
   )
 
@@ -71,12 +72,14 @@ export default class Confirmation extends Component {
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
+
         <View style={styles.whiteOverlay}>
           <ActivityIndicator
             animating={this.state.isActivityIndicatorAnimating}
             size='large'
           />
         </View>
+
         <View>
           <Button
             title="Confirmar"

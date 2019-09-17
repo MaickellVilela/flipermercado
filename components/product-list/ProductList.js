@@ -4,6 +4,8 @@ import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements'
 import axios from 'axios';
 
+import { parsePrice } from '../../helpers/currency'
+
 export default class ProductList extends Component {
   keyExtractor = (_, index) => index.toString()
 
@@ -14,7 +16,7 @@ export default class ProductList extends Component {
       <ListItem
         button
         title={item[0]}
-        subtitle={item[1].toString()}
+        subtitle={ parsePrice(item[1]) }
         onPress={() => {
           this.props.navigation.navigate('Confirmation', {
             userName: userName,
