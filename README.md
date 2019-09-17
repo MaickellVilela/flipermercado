@@ -12,7 +12,7 @@
 #### Libs dependencies
 
 ```sh
-yarn isntall
+yarn install
 ```
 
 #### Config environment
