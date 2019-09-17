@@ -2,14 +2,14 @@
 
 [A really exciting description here]
 
-## DEV envoriment
+## DEV environment
 
-### Install depedences
+### Install dependencies
 
-#### Projet depedences
+#### Project dependencies
   - Node >= `12.0.0`
 
-#### Libs depedences
+#### Libs dependencies
 
 ```sh
 yarn isntall
