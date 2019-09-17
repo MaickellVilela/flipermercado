@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements'
 
 import { createTransaction } from '../../helpers/actions'
 import { currentDate } from '../../helpers/time'
+import { parsePrice } from '../../helpers/currency'
 import styles from './styles'
 
 export default class Confirmation extends Component {
@@ -15,7 +16,7 @@ export default class Confirmation extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { navigation } = this.props
 
     const user = navigation.getParam('userName')
@@ -52,7 +53,7 @@ export default class Confirmation extends Component {
         <ScrollView>
           <Text>{ this.state.user }</Text>
           <Text>{ this.state.product }</Text>
-          <Text>{ this.state.price }</Text>
+          <Text>{ parsePrice(this.state.price) }</Text>
         </ScrollView>
         <View style={styles.whiteOverlay}>
           <ActivityIndicator
