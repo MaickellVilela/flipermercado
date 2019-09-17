@@ -55,11 +55,8 @@ export default class Confirmation extends Component {
           <Text>{ this.state.price }</Text>
         </ScrollView>
         <View style={styles.whiteOverlay}>
-          { this.state.isActivityIndicatorAnimating ?
-            ( <ActivityIndicator
-              animating
-              size='large'
-            /> ) : null
+          { this.state.isActivityIndicatorAnimating &&
+            ( <ActivityIndicator animating size='large' /> )
           }
         </View>
         <View>
