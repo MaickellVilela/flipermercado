@@ -19,7 +19,7 @@ export default class Home extends Component {
     this.setState({ users, products })
   }
 
-  keyExtractor = (item, index) => index.toString()
+  keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => (
     <ListItem

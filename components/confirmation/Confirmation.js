@@ -52,7 +52,7 @@ export default class Confirmation extends Component {
     }
   }
 
-  keyExtractor = (item, index) => index.toString()
+  keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => (
     <ListItem
