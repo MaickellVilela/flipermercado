@@ -4,4 +4,5 @@ export const parsePrice = price =>
       style: 'currency',
       currency: 'BRL',
       maximumFractionDigits: 2,
-  })
+    }
+  )
