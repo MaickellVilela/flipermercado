@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -20,7 +21,12 @@
     "react-navigation-tabs": "^2.3.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^6.0.0"
+    "babel-preset-expo": "^6.0.0",
+    "jest": "^24.9.0",
+    "react-native-jest-mocks": "^1.5.0"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "private": true
 }
