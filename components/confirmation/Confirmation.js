@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, ActivityIndicator, Alert } from 'react-native'
-import { Button } from 'react-native-elements'
+import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
+import { Button, ListItem } from 'react-native-elements'
 
 import { createTransaction } from '../../helpers/actions'
 import { currentDate } from '../../helpers/time'
@@ -11,6 +11,7 @@ export default class Confirmation extends Component {
     super(props)
 
     this.state = {
+      data: [],
       isActivityIndicatorAnimating: false,
     }
   }
@@ -22,7 +23,12 @@ export default class Confirmation extends Component {
     const product = navigation.getParam('productName')
     const price = navigation.getParam('productPrice')
 
-    this.setState({ user, product, price })
+    this.setState({
+      user,
+      data: [
+        { product, price },
+      ],
+    })
   }
 
   handleConfirm = async () => {
@@ -46,14 +52,25 @@ export default class Confirmation extends Component {
     }
   }
 
+  keyExtractor = (_, index) => index.toString()
+
+  renderItem = ({ item }) => (
+    <ListItem
+      title={item.product}
+      subtitle={item.price.toString()}
+    />
+  )
+
   render() {
+    const { data } = this.state
+
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView>
-          <Text>{ this.state.user }</Text>
-          <Text>{ this.state.product }</Text>
-          <Text>{ this.state.price }</Text>
-        </ScrollView>
+        <FlatList
+          data={data}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+        />
         <View style={styles.whiteOverlay}>
           <ActivityIndicator
             animating={this.state.isActivityIndicatorAnimating}

@@ -5,7 +5,7 @@ import { ListItem } from 'react-native-elements'
 import axios from 'axios';
 
 export default class ProductList extends Component {
-  keyExtractor = (item, index) => index.toString()
+  keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => {
     const userName = this.props.navigation.getParam('userName')
