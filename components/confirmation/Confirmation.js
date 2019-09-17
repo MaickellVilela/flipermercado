@@ -79,14 +79,14 @@ export default class Confirmation extends Component {
         </View>
         <View>
           <Button
-            type="outline"
-            title="Cancelar"
-            onPress={ () => this.props.navigation.popToTop() }
+            title="Confirmar"
+            onPress={this.handleConfirm}
           />
 
           <Button
-            title="Confirmar"
-            onPress={this.handleConfirm}
+            type="outline"
+            title="Cancelar"
+            onPress={ () => this.props.navigation.popToTop() }
           />
         </View>
       </View>
