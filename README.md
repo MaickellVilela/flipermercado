@@ -15,7 +15,7 @@
 yarn isntall
 ```
 
-#### Config envoriment
+#### Config environment
 
 Create config file
 
@@ -33,7 +33,7 @@ And inside on `./config.js` change the `googleScriptURL` value to a valid google
 #### Install Expo Client
 
 ```sh
-npm isntall -g expo-cli
+npm install -g expo-cli
 ```
 
 #### Loign with a existent [account](https://expo.io/)
