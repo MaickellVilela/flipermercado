@@ -83,12 +83,14 @@ export default class Confirmation extends Component {
           <Button
             title="Confirmar"
             onPress={this.handleConfirm}
+            disabled={this.state.isActivityIndicatorAnimating}
           />
 
           <Button
             type="outline"
             title="Cancelar"
             onPress={ () => this.props.navigation.popToTop() }
+            disabled={this.state.isActivityIndicatorAnimating}
           />
         </View>
       </View>
