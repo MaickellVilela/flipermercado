@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SectionList, Text, StyleSheet } from 'react-native'
+import { SectionList, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 import { fetchUsers, fetchProducts } from '../../helpers/actions'
