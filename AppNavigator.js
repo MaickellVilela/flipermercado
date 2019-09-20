@@ -13,7 +13,7 @@ const AppNavigator = createStackNavigator(
     Home: {
       screen: Home,
       navigationOptions: () => ({
-        headerLeft: header,
+        headerLeft: <Image style={styles.stretch} source={logo} />,
         title: 'Flipermercado'
       }),
     },
@@ -21,13 +21,11 @@ const AppNavigator = createStackNavigator(
       screen: ProductList,
       navigationOptions: () => ({
         title: 'Produtos',
-        headerRight: header
       }),
     },
     Confirmation: {
       screen: Confirmation,
       navigationOptions: ({ navigation })  => ({
-        headerRight: header,
         title: navigation.state.params.userName,
       }),
     },
@@ -47,11 +45,9 @@ const AppNavigator = createStackNavigator(
   }
 )
 
-const header = <Image style = {styles.stretch} source = { logo } />
-
 const styles = StyleSheet.create({
   stretch: {
-    width: 50,
+    width: 45,
     height: 50,
     margin: 20,
     resizeMode: 'stretch',
