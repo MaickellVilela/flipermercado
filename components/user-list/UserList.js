@@ -64,11 +64,11 @@ export default class UserList extends Component {
 
 const styles = StyleSheet.create({
   sectionHeader: {
-    paddingTop: 2,
+    paddingTop: 0,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 22,
+    paddingBottom: 0,
+    fontSize: 16,
     fontWeight: 'bold',
     color: "#FFF",
     backgroundColor: '#FC0A7E',
