@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     paddingTop: (Platform.OS === 'ios') ? 20 : 0
   }
-});
+})
 
 const AppContainer = createAppContainer(AppNavigator)
 
