@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { SectionList, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 import { fetchUsers, fetchProducts } from '../../helpers/actions'
+import { createSectionData } from '../../helpers/alphabetic-grouping'
+import styles from './styles'
 
 export default class UserList extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ export default class UserList extends Component {
     this.state = { users: [], products: [] }
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     const users = await fetchUsers()
 
     const { products } = await fetchProducts()
@@ -35,12 +37,24 @@ export default class UserList extends Component {
     />
   )
 
+  sectionData = () => {
+    const { users } = this.state
+
+    const sections = createSectionData(users)
+
+    return sections.filter(section => section.data.length !== 0)
+  }
+
   render() {
     return (
-      <FlatList
+      this.state.users &&
+      <SectionList
+        sections={this.sectionData()}
         keyExtractor={this.keyExtractor}
-        data={this.state.users}
         renderItem={this.renderItem}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={styles.sectionHeader}>{ title }</Text>
+        )}
       />
     )
   }

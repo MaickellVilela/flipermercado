@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
 import { Button, ListItem } from 'react-native-elements'
 
@@ -39,8 +39,8 @@ export default class Confirmation extends Component {
       await createTransaction({
         created_at: currentDate(),
         user: this.state.user,
-        product: this.state.product,
-        price: this.state.price,
+        product: this.state.data[0].product,
+        price: this.state.data[0].price,
       })
 
       Alert.alert(`Compra efetuada.\nObrigado, ${this.state.user}! 🥳`)
