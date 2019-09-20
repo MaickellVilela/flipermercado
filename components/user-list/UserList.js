@@ -32,7 +32,8 @@ export default class UserList extends Component {
           products: this.state.products,
         })
       }}
-    />)
+    />
+  )
 
   sectionData = () => {
     const { users } = this.state
