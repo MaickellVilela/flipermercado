@@ -1,6 +1,6 @@
 # Flipermercado
 
-[A really exciting description here]
+Flipermercado is an all-new react native project. Its high-throughput in-place user list helps users buy stuff in exchange for actual **MONEY** (usually in BRL). With it, you'll be able to control your small shop using blazingly fast high-dynamic-range API requests to __GOOGLE-SCRIPTS__ :fish: :octopus:! 
 
 ## DEV environment
 
