@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { SectionList, Text, StyleSheet } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 import { fetchUsers, fetchProducts } from '../../helpers/actions'
@@ -11,7 +11,7 @@ export default class UserList extends Component {
     this.state = { users: [], products: [] }
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     const users = await fetchUsers()
 
     const { products } = await fetchProducts()
@@ -32,16 +32,45 @@ export default class UserList extends Component {
           products: this.state.products,
         })
       }}
-    />
-  )
+    />)
+
+  sectionData = () => {
+    const { users } = this.state
+
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
+
+    const sections = alphabet.map(grapheme => ({
+      title: grapheme,
+      data: users.filter(user => user.name.startsWith(grapheme))
+    }))
+
+    return sections.filter(section => section.data.length !== 0)
+  }
 
   render() {
     return (
-      <FlatList
+      this.state.users &&
+      <SectionList
+        sections={this.sectionData()}
         keyExtractor={this.keyExtractor}
-        data={this.state.users}
         renderItem={this.renderItem}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={ styles.sectionHeader }>{ title }</Text>
+        )}
       />
     )
   }
 }
+
+const styles = StyleSheet.create({
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: "#FFF",
+    backgroundColor: '#FC0A7E',
+  },
+})
