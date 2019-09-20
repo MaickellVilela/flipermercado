@@ -3,6 +3,7 @@ import { SectionList, Text, StyleSheet } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 import { fetchUsers, fetchProducts } from '../../helpers/actions'
+import { createSectionData } from '../../helpers/alphabetic-grouping'
 
 export default class UserList extends Component {
   constructor(props) {
@@ -38,12 +39,7 @@ export default class UserList extends Component {
   sectionData = () => {
     const { users } = this.state
 
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
-
-    const sections = alphabet.map(grapheme => ({
-      title: grapheme,
-      data: users.filter(user => user.name.startsWith(grapheme))
-    }))
+    const sections = createSectionData(users)
 
     return sections.filter(section => section.data.length !== 0)
   }

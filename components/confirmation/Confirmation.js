@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
 import { Button, ListItem } from 'react-native-elements'
 

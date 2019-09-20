@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 20,
     resizeMode: 'stretch',
-    paddingTop: (Platform.OS === 'ios') ? 20 : 0
+    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
   }
 })
 
