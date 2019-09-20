@@ -4,6 +4,7 @@ import { ListItem } from 'react-native-elements'
 
 import { fetchUsers, fetchProducts } from '../../helpers/actions'
 import { createSectionData } from '../../helpers/alphabetic-grouping'
+import styles from './styles'
 
 export default class UserList extends Component {
   constructor(props) {
@@ -58,16 +59,3 @@ export default class UserList extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  sectionHeader: {
-    paddingTop: 0,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 0,
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: "#FFF",
-    backgroundColor: '#FC0A7E',
-  },
-})

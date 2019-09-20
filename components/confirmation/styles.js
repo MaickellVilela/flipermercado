@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   whiteOverlay: {
     position: 'absolute',
     left: 0,
@@ -11,5 +11,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
-
-export default styles
