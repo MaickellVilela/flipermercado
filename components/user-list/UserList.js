@@ -52,7 +52,7 @@ export default class UserList extends Component {
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
         renderSectionHeader={({ section: { title } }) => (
-          <Text style={ styles.sectionHeader }>{ title }</Text>
+          <Text style={styles.sectionHeader}>{ title }</Text>
         )}
       />
     )
