@@ -1,9 +1,11 @@
-import Confirmation from './confirmation'
-import ProductList from './product-list'
+import Splash from './splash'
 import UserList from './user-list'
+import ProductList from './product-list'
+import Confirmation from './confirmation'
 
 export {
-  Confirmation,
-  ProductList,
+  Splash,
   UserList,
+  ProductList,
+  Confirmation,
 }

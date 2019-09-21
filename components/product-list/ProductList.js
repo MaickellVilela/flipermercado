@@ -6,6 +6,10 @@ import { ListItem } from 'react-native-elements'
 import { parsePrice } from '../../helpers/currency'
 
 export default class ProductList extends Component {
+  static navigationOptions = {
+    title: 'Produtos'
+  }
+
   keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => {
