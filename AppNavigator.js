@@ -26,7 +26,7 @@ const AppNavigator = createStackNavigator(
     Confirmation: {
       screen: Confirmation,
       navigationOptions: ({ navigation })  => ({
-        title: navigation.state.params.userName,
+        title: 'Confirmação',
       }),
     },
   },

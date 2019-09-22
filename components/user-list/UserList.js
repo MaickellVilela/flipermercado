@@ -15,8 +15,7 @@ export default class UserList extends Component {
 
   async componentWillMount() {
     const users = await fetchUsers()
-
-    const { products } = await fetchProducts()
+    const products = await fetchProducts()
 
     this.setState({ users, products })
   }
@@ -30,7 +29,7 @@ export default class UserList extends Component {
       leftAvatar={{ source: { uri: item.avatar } }}
       onPress={() => {
         this.props.navigation.navigate('ProductList', {
-          userName: item.name,
+          user: item,
           products: this.state.products,
         })
       }}

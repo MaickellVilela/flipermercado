@@ -5,9 +5,9 @@ export const fetchUsers = async () => {
     const { data } = await post({ action: 'list_users' })
 
     const users = data.map((user, index) => ({
-      id: index,
       name: user[0],
-      avatar: user[1]
+      avatar: user[1],
+      balance: user[2]
     })) || []
 
     return users
@@ -22,11 +22,16 @@ export const fetchProducts = async () => {
   try {
     const { data } = await post({ action: 'list_products' })
 
-    return { products: data }
+    const products = data.map((product, index) => ({
+      name: product[0],
+      price: product[1]
+    })) || []
+
+    return products
   } catch (error) {
     console.error(error)
 
-    return { products: [] }
+    return []
   }
 }
 
