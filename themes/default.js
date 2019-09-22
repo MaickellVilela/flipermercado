@@ -15,4 +15,4 @@ export default theme = {
   Avatar: {
     rounded: true,
   },
-};
+}
