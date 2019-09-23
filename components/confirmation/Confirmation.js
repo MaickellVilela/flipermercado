@@ -8,6 +8,10 @@ import { parsePrice } from '../../helpers/currency'
 import styles from './styles'
 
 export default class Confirmation extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.userName
+  })
+
   constructor(props) {
     super(props)
 
