@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AppNavigator from './AppNavigator'
 
-import { ThemeProvider } from 'react-native-elements';
+import { ThemeProvider } from 'react-native-elements'
 
 import theme from './themes/default'
 
