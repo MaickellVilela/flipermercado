@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
-import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
-import { Button, ListItem } from 'react-native-elements'
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  View,
+} from 'react-native'
+
+import { Button, List, ListItem, Overlay } from 'react-native-elements'
 
 import { UserBar } from '../../components'
 
@@ -17,13 +23,13 @@ export default class Confirmation extends Component {
 
     this.state = {
       user: navigation.getParam('user'),
-      product: navigation.getParam('product'),
+      cart: navigation.getParam('cart'),
       isActivityIndicatorAnimating: false,
     }
   }
 
   handleConfirm = async () => {
-    const { user, product } = this.state
+    const { user, cart } = this.state
 
     this.setState({ isActivityIndicatorAnimating: true })
 
@@ -31,8 +37,8 @@ export default class Confirmation extends Component {
       await createTransaction({
         created_at: currentDate(),
         user: user.name,
-        product: product.name,
-        price: product.price,
+        product: cart[0].name,
+        price: cart[0].price,
       })
 
       Alert.alert(`Compra efetuada.\nObrigado, ${user.name}! 🥳`)
@@ -45,33 +51,42 @@ export default class Confirmation extends Component {
     }
   }
 
+  cartTotalPrice = () => this.state.cart.reduce((memo, product) => memo + product.price, 0)
+
   keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => (
     <ListItem
-      title={ item.name }
-      subtitle={ parsePrice(item.price) }
+      title={item.name}
+      rightTitle={ parsePrice(item.price) }
     />
   )
 
   render() {
-    const { user, product } = this.state
+    const { user, cart } = this.state
 
     return (
       <View style={{ flex: 1 }}>
+        { this.state.isActivityIndicatorAnimating &&
+          ( <View style={styles.whiteOverlay}>
+              <ActivityIndicator animating size='large' />
+            </View>
+          )
+        }
+
         <UserBar user={user} />
 
         <FlatList
-          data={[product]}
+          data={cart}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
 
-        <View style={styles.whiteOverlay}>
-          { this.state.isActivityIndicatorAnimating &&
-            ( <ActivityIndicator animating size='large' /> )
-          }
-        </View>
+        <ListItem
+          titleStyle={styles.total}
+          title='Total'
+          rightTitle={ parsePrice(this.cartTotalPrice()) }
+        />
 
         <View>
           <Button

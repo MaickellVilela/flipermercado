@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, View } from 'react-native'
 
-import { ListItem } from 'react-native-elements'
+import { ListItem, Button } from 'react-native-elements'
 import { UserBar } from '../../components'
 
 import { parsePrice } from '../../helpers/currency'
@@ -13,11 +13,15 @@ export default class ProductList extends Component {
     const { navigation } = this.props
 
     this.state = {
+      cart: [],
       user: navigation.getParam('user'),
       products: navigation.getParam('products')
     }
   }
+
   keyExtractor = (_, index) => index.toString()
+
+  addProductToCart = (product) => this.state.cart.push(product)
 
   renderItem = ({ item }) => {
     return (
@@ -25,27 +29,32 @@ export default class ProductList extends Component {
         button
         title={item.name}
         subtitle={ parsePrice(item.price) }
-        onPress={() => {
-          this.props.navigation.navigate('Confirmation', {
-            user: this.state.user,
-            product: item,
-          })
-        }}
+        onPress={() => this.addProductToCart(item)}
       />
     )
   }
 
   render() {
-    const { user, products } = this.state
+    const { user, products, cart } = this.state
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <UserBar user={user} />
 
         <FlatList
           keyExtractor={this.keyExtractor}
           data={products}
           renderItem={this.renderItem}
+        />
+
+        <Button
+          title="Continuar"
+          onPress={() => {
+            this.props.navigation.navigate('Confirmation', {
+              user: user,
+              cart: cart,
+            })
+          }}
         />
       </View>
     )

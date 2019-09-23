@@ -10,4 +10,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  total: {
+    fontWeight: 'bold',
+  },
 })
