@@ -11,7 +11,7 @@ import styles from './styles'
 
 export default class Confirmation extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Confirmação'
+    title: 'Carrinho'
   })
 
   constructor(props) {
@@ -79,7 +79,7 @@ export default class Confirmation extends Component {
 
         <View>
           <Button
-            title="Confirmar"
+            title="Comprar"
             onPress={this.handleConfirm}
             disabled={this.state.isActivityIndicatorAnimating}
           />
