@@ -1,14 +1,35 @@
 import React, { Component } from 'react'
-import { UserList } from './components'
+import { UserList, Splash } from './components'
+
+import { fetchUsers, fetchProducts } from './helpers/actions'
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props)
+  static navigationOptions = ({ navigation }) => {
+    if (navigation.getParam('isLoading')) {
+      return { header: null }
+    }
+
+    return { title: 'Flipermercado' }
   }
 
-  render() {
-    return (
+  isLoading = () => this.props.navigation.getParam('isLoading')
+
+  async componentWillMount() {
+    const users = await fetchUsers()
+    const products = await fetchProducts()
+
+    this.props.navigation.setParams({
+      isLoading: false,
+      users: users,
+      products: products
+    })
+  }
+
+  render = () => (
+    this.isLoading() ? (
+      <Splash />
+    ) : (
       <UserList navigation={this.props.navigation} />
     )
-  }
+  )
 }

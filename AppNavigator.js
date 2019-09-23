@@ -4,39 +4,30 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 
 import { Platform, Image, StyleSheet } from 'react-native'
 
-import Home from './Home'
-import { Confirmation, ProductList } from './components'
 import logo from './assets/logo.png'
+
+import Home from './Home'
+import { ProductList, Confirmation } from './components'
 
 const AppNavigator = createStackNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: () => ({
-        headerLeft: <Image style={styles.stretch} source={logo} />,
-        title: 'Flipermercado'
-      }),
+      params: {
+        isLoading: true,
+      },
     },
-    ProductList: {
-      screen: ProductList,
-      navigationOptions: () => ({
-        title: 'Produtos',
-      }),
-    },
-    Confirmation: {
-      screen: Confirmation,
-      navigationOptions: ({ navigation })  => ({
-        title: 'Confirmação',
-      }),
-    },
+    ProductList: { screen: ProductList },
+    Confirmation: { screen: Confirmation },
   },
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
+      headerLeft: () => (<Image style={styles.stretch} source={logo} />),
+      headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff',
       },
-      headerTintColor: '#000',
       headerTitleStyle: {
         fontSize: 22,
         fontWeight: 'bold',

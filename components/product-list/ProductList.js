@@ -7,6 +7,10 @@ import { UserBar } from '../../components'
 import { parsePrice } from '../../helpers/currency'
 
 export default class ProductList extends Component {
+  static navigationOptions = {
+    title: 'Produtos'
+  }
+
   constructor(props) {
     super(props)
 
@@ -17,6 +21,7 @@ export default class ProductList extends Component {
       products: navigation.getParam('products')
     }
   }
+
   keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => {

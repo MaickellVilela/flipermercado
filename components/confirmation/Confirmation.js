@@ -10,6 +10,10 @@ import { parsePrice } from '../../helpers/currency'
 import styles from './styles'
 
 export default class Confirmation extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Confirmação'
+  })
+
   constructor(props) {
     super(props)
 
