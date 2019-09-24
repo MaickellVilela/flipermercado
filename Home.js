@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+import { Platform, Image, StyleSheet } from 'react-native'
+
 import { UserList, Splash } from './components'
 
 import { fetchUsers, fetchProducts } from './helpers/actions'
+
+import logo from './assets/logo.png'
 
 export default class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -9,7 +13,10 @@ export default class Home extends Component {
       return { header: null }
     }
 
-    return { title: 'Flipermercado' }
+    return {
+      title: 'Flipermercado',
+      headerLeft: (<Image style={styles.stretch} source={logo} />),
+    }
   }
 
   isLoading = () => this.props.navigation.getParam('isLoading')
@@ -33,3 +40,13 @@ export default class Home extends Component {
     )
   )
 }
+
+const styles = StyleSheet.create({
+  stretch: {
+    width: 45,
+    height: 50,
+    margin: 20,
+    resizeMode: 'stretch',
+    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
+  }
+})
