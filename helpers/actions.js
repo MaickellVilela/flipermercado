@@ -7,7 +7,7 @@ export const fetchUsers = async () => {
     const users = data.map((user, index) => ({
       id: index,
       name: user[0],
-      avatar: user[1]
+      avatar: user[1],
     })) || []
 
     return users
@@ -30,5 +30,5 @@ export const fetchProducts = async () => {
   }
 }
 
-export const createTransaction = payload =>
-  post({ action: 'create_transaction', payload})
+export const createTransaction = (payload) =>
+  post({ action: 'create_transaction', payload })

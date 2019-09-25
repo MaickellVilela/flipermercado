@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingBottom: 0,
     fontSize: 16,
     fontWeight: 'bold',
-    color: "#FFF",
+    color: '#FFF',
     backgroundColor: '#FC0A7E',
   },
 })

@@ -1,7 +1,5 @@
 import React from 'react'
-
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-
 import { Platform, Image, StyleSheet } from 'react-native'
 
 import logo from './assets/logo.png'
@@ -33,8 +31,8 @@ const AppNavigator = createStackNavigator(
         fontSize: 22,
         fontWeight: 'bold',
       },
-    }
-  }
+    },
+  },
 )
 
 const styles = StyleSheet.create({
@@ -44,7 +42,7 @@ const styles = StyleSheet.create({
     margin: 20,
     resizeMode: 'stretch',
     paddingTop: (Platform.OS === 'ios') ? 20 : 0,
-  }
+  },
 })
 
 const AppContainer = createAppContainer(AppNavigator)

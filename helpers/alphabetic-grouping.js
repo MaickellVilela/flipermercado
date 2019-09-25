@@ -1,10 +1,9 @@
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
-export const createSectionData = users => ALPHABET
+export const createSectionData = (users) => ALPHABET
   .toUpperCase()
   .split('')
-  .map(letter => ({
+  .map((letter) => ({
     title: letter,
-    data: users.filter(user => user.name.startsWith(letter))
-  })
-)
+    data: users.filter((user) => user.name.startsWith(letter)),
+  }))
