@@ -7,6 +7,16 @@ import logo from './assets/logo.png'
 import Home from './Home'
 import { UserList, ProductList, Confirmation } from './components'
 
+const styles = StyleSheet.create({
+  stretch: {
+    width: 45,
+    height: 50,
+    margin: 20,
+    resizeMode: 'stretch',
+    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
+  },
+})
+
 const AppNavigator = createStackNavigator(
   {
     Home: {
@@ -34,16 +44,6 @@ const AppNavigator = createStackNavigator(
     },
   },
 )
-
-const styles = StyleSheet.create({
-  stretch: {
-    width: 45,
-    height: 50,
-    margin: 20,
-    resizeMode: 'stretch',
-    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
-  },
-})
 
 const AppContainer = createAppContainer(AppNavigator)
 

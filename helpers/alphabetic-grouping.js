@@ -7,3 +7,5 @@ export const createSectionData = (users) => ALPHABET
     title: letter,
     data: users.filter((user) => user.name.startsWith(letter)),
   }))
+
+export default { createSectionData }

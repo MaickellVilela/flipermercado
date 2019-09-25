@@ -6,3 +6,5 @@ export const parsePrice = (price) =>
       maximumFractionDigits: 2,
     },
   )
+
+export default { parsePrice }

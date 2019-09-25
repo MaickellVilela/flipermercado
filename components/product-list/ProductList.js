@@ -6,23 +6,31 @@ import { ListItem } from 'react-native-elements'
 import { parsePrice } from '../../helpers/currency'
 
 export default class ProductList extends Component {
-  static navigationOptions = {
-    title: 'Produtos'
+  static navigationOptions() {
+    return {
+      title: 'Produtos',
+    }
   }
 
-  keyExtractor = (_, index) => index.toString()
+  constructor() {
+    super()
 
-  renderItem = ({ item }) => {
+    this.renderItem = this.renderItem.bind(this)
+  }
+
+  keyExtractor(_, index) { return index.toString() }
+
+  renderItem({ item }) {
     const userName = this.props.navigation.getParam('userName')
 
     return (
       <ListItem
         button
         title={item[0]}
-        subtitle={ parsePrice(item[1]) }
+        subtitle={parsePrice(item[1])}
         onPress={() => {
           this.props.navigation.navigate('Confirmation', {
-            userName: userName,
+            userName,
             productName: item[0],
             productPrice: item[1],
           })

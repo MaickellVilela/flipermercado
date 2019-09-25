@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
+import {
+  View, FlatList, ActivityIndicator, Alert,
+} from 'react-native'
 import { Button, ListItem } from 'react-native-elements'
 
 import { createTransaction } from '../../helpers/actions'
@@ -8,9 +10,9 @@ import { parsePrice } from '../../helpers/currency'
 import styles from './styles'
 
 export default class Confirmation extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.userName
-  })
+  static navigationOptions({ navigation }) {
+    return { title: navigation.state.params.userName }
+  }
 
   constructor(props) {
     super(props)
@@ -19,6 +21,8 @@ export default class Confirmation extends Component {
       data: [],
       isActivityIndicatorAnimating: false,
     }
+
+    this.handleConfirm = this.handleConfirm.bind(this)
   }
 
   componentWillMount() {
@@ -36,7 +40,7 @@ export default class Confirmation extends Component {
     })
   }
 
-  handleConfirm = async () => {
+  async handleConfirm() {
     this.setState({ isActivityIndicatorAnimating: true })
 
     try {
@@ -49,7 +53,7 @@ export default class Confirmation extends Component {
 
       Alert.alert(`Compra efetuada.\nObrigado, ${this.state.user}! 🥳`)
     } catch (error) {
-      Alert.alert(`Ocorreu um erro ao confirmar a compra. 🤕`)
+      Alert.alert('Ocorreu um erro ao confirmar a compra. 🤕')
     } finally {
       this.setState({ isActivityIndicatorAnimating: false })
 
@@ -57,14 +61,16 @@ export default class Confirmation extends Component {
     }
   }
 
-  keyExtractor = (_, index) => index.toString()
+  keyExtractor(_, index) { return index.toString() }
 
-  renderItem = ({ item }) => (
-    <ListItem
-      title={ item.product }
-      subtitle={ parsePrice(item.price) }
-    />
-  )
+  renderItem({ item }) {
+    return (
+      <ListItem
+        title={item.product}
+        subtitle={parsePrice(item.price)}
+      />
+    )
+  }
 
   render() {
     const { data } = this.state
@@ -78,9 +84,8 @@ export default class Confirmation extends Component {
         />
 
         <View style={styles.whiteOverlay}>
-          { this.state.isActivityIndicatorAnimating &&
-            ( <ActivityIndicator animating size='large' /> )
-          }
+          {this.state.isActivityIndicatorAnimating
+            && (<ActivityIndicator animating size="large" />)}
         </View>
 
         <View>
@@ -93,7 +98,7 @@ export default class Confirmation extends Component {
           <Button
             type="outline"
             title="Cancelar"
-            onPress={ () => this.props.navigation.popToTop() }
+            onPress={() => this.props.navigation.popToTop()}
             disabled={this.state.isActivityIndicatorAnimating}
           />
         </View>

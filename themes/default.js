@@ -1,4 +1,4 @@
-export default theme = {
+export const theme = {
   colors: {
     primary: '#FC0A7E',
   },
@@ -16,3 +16,5 @@ export default theme = {
     rounded: true,
   },
 }
+
+export default { theme }
