@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { UserList, Splash } from './components'
+import PropTypes from 'prop-types'
 
+import { UserList, Splash } from './components'
 import { fetchUsers, fetchProducts } from './helpers/actions'
 
 export default class Home extends Component {
@@ -13,10 +14,11 @@ export default class Home extends Component {
   }
 
   async componentWillMount() {
+    const { props } = this
     const users = await fetchUsers()
     const { products } = await fetchProducts()
 
-    this.props.navigation.setParams({
+    props.navigation.setParams({
       isLoading: false,
       users,
       products,
@@ -24,14 +26,22 @@ export default class Home extends Component {
   }
 
   isLoading() {
-    return this.props.navigation.getParam('isLoading')
+    const { props } = this
+
+    return props.navigation.getParam('isLoading')
   }
 
   render() {
+    const { props } = this
+
     return this.isLoading() ? (
       <Splash />
     ) : (
-      <UserList navigation={this.props.navigation} />
+      <UserList navigation={props.navigation} />
     )
   }
+}
+
+Home.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }

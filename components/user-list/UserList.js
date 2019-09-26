@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { SectionList, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
+import PropTypes from 'prop-types'
 
 import { createSectionData } from '../../helpers/alphabetic-grouping'
 import styles from './styles'
@@ -30,15 +31,17 @@ export default class UserList extends Component {
   }
 
   renderItem({ item }) {
+    const { props, state } = this
+
     return (
       <ListItem
         button
         title={item.name}
         leftAvatar={{ source: { uri: item.avatar } }}
         onPress={() => {
-          this.props.navigation.navigate('ProductList', {
+          props.navigation.navigate('ProductList', {
             userName: item.name,
-            products: this.state.products,
+            products: state.products,
           })
         }}
       />
@@ -46,8 +49,10 @@ export default class UserList extends Component {
   }
 
   render() {
+    const { state } = this
+
     return (
-      this.state.users && (
+      state.users && (
         <SectionList
           sections={this.sectionData()}
           keyExtractor={this.keyExtractor}
@@ -59,4 +64,8 @@ export default class UserList extends Component {
       )
     )
   }
+}
+
+UserList.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }

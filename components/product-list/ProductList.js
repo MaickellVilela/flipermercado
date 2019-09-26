@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
+import PropTypes from 'prop-types'
 
 import { parsePrice } from '../../helpers/currency'
 
@@ -22,7 +23,8 @@ export default class ProductList extends Component {
   }
 
   renderItem({ item }) {
-    const userName = this.props.navigation.getParam('userName')
+    const { props } = this
+    const userName = props.navigation.getParam('userName')
 
     return (
       <ListItem
@@ -30,7 +32,7 @@ export default class ProductList extends Component {
         title={item[0]}
         subtitle={parsePrice(item[1])}
         onPress={() => {
-          this.props.navigation.navigate('Confirmation', {
+          props.navigation.navigate('Confirmation', {
             userName,
             productName: item[0],
             productPrice: item[1],
@@ -52,4 +54,8 @@ export default class ProductList extends Component {
       />
     )
   }
+}
+
+ProductList.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }
