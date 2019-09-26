@@ -15,7 +15,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'simple-import-sort'],
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -28,5 +28,7 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'class-methods-use-this': 'off',
+    'simple-import-sort/sort': 'error',
+    'sort-imports': 'off',
   },
 }
