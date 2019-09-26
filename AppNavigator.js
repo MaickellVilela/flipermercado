@@ -3,7 +3,6 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import { Platform, Image, StyleSheet } from 'react-native'
 
 import logo from './assets/logo.png'
-
 import Home from './Home'
 import { UserList, ProductList, Confirmation } from './components'
 
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 20,
     resizeMode: 'stretch',
-    paddingTop: (Platform.OS === 'ios') ? 20 : 0,
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
 })
 
@@ -32,7 +31,7 @@ const AppNavigator = createStackNavigator(
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
-      headerLeft: () => (<Image style={styles.stretch} source={logo} />),
+      headerLeft: () => <Image style={styles.stretch} source={logo} />,
       headerTintColor: '#000',
       headerStyle: {
         backgroundColor: '#fff',

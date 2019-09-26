@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
 import {
   View, FlatList, ActivityIndicator, Alert,
 } from 'react-native'
+import React, { Component } from 'react'
 import { Button, ListItem } from 'react-native-elements'
 
 import { createTransaction } from '../../helpers/actions'
@@ -34,9 +34,7 @@ export default class Confirmation extends Component {
 
     this.setState({
       user,
-      data: [
-        { product, price },
-      ],
+      data: [{ product, price }],
     })
   }
 
@@ -61,15 +59,12 @@ export default class Confirmation extends Component {
     }
   }
 
-  keyExtractor(_, index) { return index.toString() }
+  keyExtractor(_, index) {
+    return index.toString()
+  }
 
   renderItem({ item }) {
-    return (
-      <ListItem
-        title={item.product}
-        subtitle={parsePrice(item.price)}
-      />
-    )
+    return <ListItem title={item.product} subtitle={parsePrice(item.price)} />
   }
 
   render() {
@@ -84,8 +79,9 @@ export default class Confirmation extends Component {
         />
 
         <View style={styles.whiteOverlay}>
-          {this.state.isActivityIndicatorAnimating
-            && (<ActivityIndicator animating size="large" />)}
+          {this.state.isActivityIndicatorAnimating && (
+            <ActivityIndicator animating size="large" />
+          )}
         </View>
 
         <View>

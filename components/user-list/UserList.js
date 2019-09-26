@@ -17,7 +17,17 @@ export default class UserList extends Component {
     this.renderItem = this.renderItem.bind(this)
   }
 
-  keyExtractor(_, index) { return index.toString() }
+  keyExtractor(_, index) {
+    return index.toString()
+  }
+
+  sectionData() {
+    const { users } = this.state
+
+    const sections = createSectionData(users)
+
+    return sections.filter((section) => section.data.length !== 0)
+  }
 
   renderItem({ item }) {
     return (
@@ -35,18 +45,9 @@ export default class UserList extends Component {
     )
   }
 
-  sectionData() {
-    const { users } = this.state
-
-    const sections = createSectionData(users)
-
-    return sections.filter((section) => section.data.length !== 0)
-  }
-
   render() {
     return (
-      this.state.users
-      && (
+      this.state.users && (
         <SectionList
           sections={this.sectionData()}
           keyExtractor={this.keyExtractor}

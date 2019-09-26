@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
-
 import { ListItem } from 'react-native-elements'
 
 import { parsePrice } from '../../helpers/currency'
@@ -18,7 +17,9 @@ export default class ProductList extends Component {
     this.renderItem = this.renderItem.bind(this)
   }
 
-  keyExtractor(_, index) { return index.toString() }
+  keyExtractor(_, index) {
+    return index.toString()
+  }
 
   renderItem({ item }) {
     const userName = this.props.navigation.getParam('userName')

@@ -23,15 +23,15 @@ export default class Home extends Component {
     })
   }
 
-  isLoading() { return this.props.navigation.getParam('isLoading') }
+  isLoading() {
+    return this.props.navigation.getParam('isLoading')
+  }
 
   render() {
-    return (
-      this.isLoading() ? (
-        <Splash />
-      ) : (
-        <UserList navigation={this.props.navigation} />
-      )
+    return this.isLoading() ? (
+      <Splash />
+    ) : (
+      <UserList navigation={this.props.navigation} />
     )
   }
 }

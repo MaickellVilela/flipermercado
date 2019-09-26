@@ -4,8 +4,5 @@ import ProductList from './product-list'
 import Confirmation from './confirmation'
 
 export {
-  Splash,
-  UserList,
-  ProductList,
-  Confirmation,
+  Splash, UserList, ProductList, Confirmation,
 }
