@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { UserList, Splash } from './components'
-import { fetchUsers, fetchProducts } from './helpers/actions'
+import { Splash, UserList } from './components'
+import { fetchProducts, fetchUsers } from './helpers/actions'
 
 export default class Home extends Component {
   static navigationOptions({ navigation }) {

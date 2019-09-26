@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
-import PropTypes from 'prop-types'
 
 import { parsePrice } from '../../helpers/currency'
 

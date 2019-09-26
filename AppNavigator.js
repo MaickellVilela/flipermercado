@@ -1,10 +1,10 @@
 import React from 'react'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
-import { Platform, Image, StyleSheet } from 'react-native'
+import { Image, Platform, StyleSheet } from 'react-native'
+import { createAppContainer, createStackNavigator } from 'react-navigation'
 
 import logo from './assets/logo.png'
+import { Confirmation, ProductList, UserList } from './components'
 import Home from './Home'
-import { UserList, ProductList, Confirmation } from './components'
 
 const styles = StyleSheet.create({
   stretch: {

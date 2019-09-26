@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { SectionList, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
-import PropTypes from 'prop-types'
 
 import { createSectionData } from '../../helpers/alphabetic-grouping'
 import styles from './styles'

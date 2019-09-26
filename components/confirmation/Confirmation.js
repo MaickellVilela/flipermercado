@@ -1,13 +1,14 @@
-import {
-  View, FlatList, ActivityIndicator, Alert,
-} from 'react-native'
-import React, { Component } from 'react'
-import { Button, ListItem } from 'react-native-elements'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import {
+  ActivityIndicator, Alert,
+  FlatList, View,
+} from 'react-native'
+import { Button, ListItem } from 'react-native-elements'
 
 import { createTransaction } from '../../helpers/actions'
-import { currentDate } from '../../helpers/time'
 import { parsePrice } from '../../helpers/currency'
+import { currentDate } from '../../helpers/time'
 import styles from './styles'
 
 export default class Confirmation extends Component {
