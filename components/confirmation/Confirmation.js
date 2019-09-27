@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
-  ActivityIndicator, Alert,
-  FlatList, View,
+  ActivityIndicator, Alert, FlatList, View,
 } from 'react-native'
 import { Button, ListItem } from 'react-native-elements'
 
@@ -41,25 +40,26 @@ export default class Confirmation extends Component {
   }
 
   async handleConfirm() {
-    const { props, state } = this
+    const { navigation } = this.props
+    const { user, data } = this.state
 
     this.setState({ isActivityIndicatorAnimating: true })
 
     try {
       await createTransaction({
         created_at: currentDate(),
-        user: state.user,
-        product: state.data[0].product,
-        price: state.data[0].price,
+        product: data[0].product,
+        price: data[0].price,
+        user,
       })
 
-      Alert.alert(`Compra efetuada.\nObrigado, ${state.user}! 🥳`)
+      Alert.alert(`Compra efetuada.\nObrigado, ${user}! 🥳`)
     } catch (error) {
       Alert.alert('Ocorreu um erro ao confirmar a compra. 🤕')
     } finally {
       this.setState({ isActivityIndicatorAnimating: false })
 
-      props.navigation.popToTop()
+      navigation.popToTop()
     }
   }
 
@@ -72,8 +72,8 @@ export default class Confirmation extends Component {
   }
 
   render() {
-    const { props, state } = this
-    const { data } = state
+    const { navigation } = this.props
+    const { data, isActivityIndicatorAnimating } = this.state
 
     return (
       <View style={{ flex: 1 }}>
@@ -84,7 +84,7 @@ export default class Confirmation extends Component {
         />
 
         <View style={styles.whiteOverlay}>
-          {state.isActivityIndicatorAnimating && (
+          {isActivityIndicatorAnimating && (
             <ActivityIndicator animating size="large" />
           )}
         </View>
@@ -93,14 +93,14 @@ export default class Confirmation extends Component {
           <Button
             title="Confirmar"
             onPress={this.handleConfirm}
-            disabled={state.isActivityIndicatorAnimating}
+            disabled={isActivityIndicatorAnimating}
           />
 
           <Button
             type="outline"
             title="Cancelar"
-            onPress={() => props.navigation.popToTop()}
-            disabled={state.isActivityIndicatorAnimating}
+            onPress={() => navigation.popToTop()}
+            disabled={isActivityIndicatorAnimating}
           />
         </View>
       </View>

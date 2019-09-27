@@ -23,8 +23,8 @@ export default class ProductList extends Component {
   }
 
   renderItem({ item }) {
-    const { props } = this
-    const userName = props.navigation.getParam('userName')
+    const { navigation } = this.props
+    const userName = navigation.getParam('userName')
 
     return (
       <ListItem
@@ -32,7 +32,7 @@ export default class ProductList extends Component {
         title={item[0]}
         subtitle={parsePrice(item[1])}
         onPress={() => {
-          props.navigation.navigate('Confirmation', {
+          navigation.navigate('Confirmation', {
             userName,
             productName: item[0],
             productPrice: item[1],

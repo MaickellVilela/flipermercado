@@ -14,11 +14,11 @@ export default class Home extends Component {
   }
 
   async componentWillMount() {
-    const { props } = this
-    const users = await fetchUsers()
+    const { navigation } = this.props
     const { products } = await fetchProducts()
+    const users = await fetchUsers()
 
-    props.navigation.setParams({
+    navigation.setParams({
       isLoading: false,
       users,
       products,
@@ -26,19 +26,15 @@ export default class Home extends Component {
   }
 
   isLoading() {
-    const { props } = this
+    const { navigation } = this.props
 
-    return props.navigation.getParam('isLoading')
+    return navigation.getParam('isLoading')
   }
 
   render() {
-    const { props } = this
+    const { navigation } = this.props
 
-    return this.isLoading() ? (
-      <Splash />
-    ) : (
-      <UserList navigation={props.navigation} />
-    )
+    return this.isLoading() ? <Splash /> : <UserList navigation={navigation} />
   }
 }
 

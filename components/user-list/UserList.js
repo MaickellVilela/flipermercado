@@ -31,7 +31,8 @@ export default class UserList extends Component {
   }
 
   renderItem({ item }) {
-    const { props, state } = this
+    const { navigation } = this.props
+    const { products } = this.state
 
     return (
       <ListItem
@@ -39,9 +40,9 @@ export default class UserList extends Component {
         title={item.name}
         leftAvatar={{ source: { uri: item.avatar } }}
         onPress={() => {
-          props.navigation.navigate('ProductList', {
+          navigation.navigate('ProductList', {
             userName: item.name,
-            products: state.products,
+            products,
           })
         }}
       />
@@ -49,10 +50,10 @@ export default class UserList extends Component {
   }
 
   render() {
-    const { state } = this
+    const { users } = this.state
 
     return (
-      state.users && (
+      users && (
         <SectionList
           sections={this.sectionData()}
           keyExtractor={this.keyExtractor}
