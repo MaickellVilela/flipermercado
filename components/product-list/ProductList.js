@@ -12,8 +12,8 @@ export default class ProductList extends Component {
     }
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.renderItem = this.renderItem.bind(this)
   }
