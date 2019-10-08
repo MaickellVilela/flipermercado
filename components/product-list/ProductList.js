@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 import { parsePrice } from '../../helpers/currency'
+import UserBar from '../user-bar'
 
 export default class ProductList extends Component {
   static navigationOptions() {
@@ -15,6 +16,13 @@ export default class ProductList extends Component {
   constructor(props) {
     super(props)
 
+    const { navigation } = this.props
+
+    this.state = {
+      user: navigation.getParam('user'),
+      products: navigation.getParam('products'),
+    }
+
     this.renderItem = this.renderItem.bind(this)
   }
 
@@ -24,18 +32,17 @@ export default class ProductList extends Component {
 
   renderItem({ item }) {
     const { navigation } = this.props
-    const userName = navigation.getParam('userName')
+    const { user } = this.state
 
     return (
       <ListItem
         button
-        title={item[0]}
-        subtitle={parsePrice(item[1])}
+        title={item.name}
+        subtitle={parsePrice(item.price)}
         onPress={() => {
           navigation.navigate('Confirmation', {
-            userName,
-            productName: item[0],
-            productPrice: item[1],
+            user,
+            product: item,
           })
         }}
       />
@@ -43,15 +50,18 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { navigation } = this.props
-    const products = navigation.getParam('products')
+    const { user, products } = this.state
 
     return (
-      <FlatList
-        keyExtractor={this.keyExtractor}
-        data={products}
-        renderItem={this.renderItem}
-      />
+      <View>
+        <UserBar user={user} />
+
+        <FlatList
+          keyExtractor={this.keyExtractor}
+          data={products}
+          renderItem={this.renderItem}
+        />
+      </View>
     )
   }
 }

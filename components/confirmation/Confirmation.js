@@ -8,20 +8,20 @@ import { Button, ListItem } from 'react-native-elements'
 import { createTransaction } from '../../helpers/actions'
 import { parsePrice } from '../../helpers/currency'
 import { currentDate } from '../../helpers/time'
+import UserBar from '../user-bar'
 import styles from './styles'
 
 export default class Confirmation extends Component {
-  static navigationOptions({ navigation }) {
-    return { title: navigation.state.params.userName }
+  static navigationOptions() {
+    return {
+      title: 'Carrinho',
+    }
   }
 
   constructor(props) {
     super(props)
 
-    this.state = {
-      data: [],
-      isActivityIndicatorAnimating: false,
-    }
+    this.state = { isActivityIndicatorAnimating: false }
 
     this.handleConfirm = this.handleConfirm.bind(this)
   }
@@ -29,31 +29,27 @@ export default class Confirmation extends Component {
   componentWillMount() {
     const { navigation } = this.props
 
-    const user = navigation.getParam('userName')
-    const product = navigation.getParam('productName')
-    const price = navigation.getParam('productPrice')
+    const user = navigation.getParam('user')
+    const product = navigation.getParam('product')
 
-    this.setState({
-      user,
-      data: [{ product, price }],
-    })
+    this.setState({ user, product })
   }
 
   async handleConfirm() {
     const { navigation } = this.props
-    const { user, data } = this.state
+    const { user, product } = this.state
 
     this.setState({ isActivityIndicatorAnimating: true })
 
     try {
       await createTransaction({
         created_at: currentDate(),
-        product: data[0].product,
-        price: data[0].price,
-        user,
+        user: user.name,
+        product: product.name,
+        price: product.price,
       })
 
-      Alert.alert(`Compra efetuada.\nObrigado, ${user}! 🥳`)
+      Alert.alert(`Compra efetuada.\nObrigado, ${user.name}! 🥳`)
     } catch (error) {
       Alert.alert('Ocorreu um erro ao confirmar a compra. 🤕')
     } finally {
@@ -68,17 +64,19 @@ export default class Confirmation extends Component {
   }
 
   renderItem({ item }) {
-    return <ListItem title={item.product} subtitle={parsePrice(item.price)} />
+    return <ListItem title={item.name} subtitle={parsePrice(item.price)} />
   }
 
   render() {
     const { navigation } = this.props
-    const { data, isActivityIndicatorAnimating } = this.state
+    const { user, product, isActivityIndicatorAnimating } = this.state
 
     return (
       <View style={{ flex: 1 }}>
+        <UserBar user={user} />
+
         <FlatList
-          data={data}
+          data={[product]}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
@@ -91,7 +89,7 @@ export default class Confirmation extends Component {
 
         <View>
           <Button
-            title="Confirmar"
+            title="Comprar"
             onPress={this.handleConfirm}
             disabled={isActivityIndicatorAnimating}
           />

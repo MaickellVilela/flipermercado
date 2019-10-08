@@ -41,7 +41,7 @@ export default class UserList extends Component {
         leftAvatar={{ source: { uri: item.avatar } }}
         onPress={() => {
           navigation.navigate('ProductList', {
-            userName: item.name,
+            user: item,
             products,
           })
         }}

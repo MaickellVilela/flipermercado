@@ -3,7 +3,7 @@ import { Image, Platform, StyleSheet } from 'react-native'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 
 import logo from './assets/logo.png'
-import { Confirmation, ProductList, UserList } from './components'
+import { Confirmation, ProductList } from './components'
 import Home from './Home'
 
 const styles = StyleSheet.create({
@@ -24,7 +24,6 @@ const AppNavigator = createStackNavigator(
         isLoading: true,
       },
     },
-    UserList: { screen: UserList },
     ProductList: { screen: ProductList },
     Confirmation: { screen: Confirmation },
   },

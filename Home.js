@@ -15,14 +15,11 @@ export default class Home extends Component {
 
   async componentWillMount() {
     const { navigation } = this.props
-    const { products } = await fetchProducts()
-    const users = await fetchUsers()
 
-    navigation.setParams({
-      isLoading: false,
-      users,
-      products,
-    })
+    const users = await fetchUsers()
+    const products = await fetchProducts()
+
+    navigation.setParams({ users, products, isLoading: false })
   }
 
   isLoading() {
