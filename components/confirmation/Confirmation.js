@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
 import { Button, ListItem } from 'react-native-elements'
 
+import { UserBar } from '../../components'
+
 import { createTransaction } from '../../helpers/actions'
 import { currentDate } from '../../helpers/time'
 import { parsePrice } from '../../helpers/currency'
@@ -9,45 +11,35 @@ import styles from './styles'
 
 export default class Confirmation extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.userName
+    title: 'Carrinho'
   })
 
   constructor(props) {
     super(props)
 
+    const { navigation } = this.props
+
     this.state = {
-      data: [],
+      user: navigation.getParam('user'),
+      product: navigation.getParam('product'),
       isActivityIndicatorAnimating: false,
     }
   }
 
-  componentWillMount() {
-    const { navigation } = this.props
-
-    const user = navigation.getParam('userName')
-    const product = navigation.getParam('productName')
-    const price = navigation.getParam('productPrice')
-
-    this.setState({
-      user,
-      data: [
-        { product, price },
-      ],
-    })
-  }
-
   handleConfirm = async () => {
+    const { user, product } = this.state
+
     this.setState({ isActivityIndicatorAnimating: true })
 
     try {
       await createTransaction({
         created_at: currentDate(),
-        user: this.state.user,
-        product: this.state.data[0].product,
-        price: this.state.data[0].price,
+        user: user.name,
+        product: product.name,
+        price: product.price,
       })
 
-      Alert.alert(`Compra efetuada.\nObrigado, ${this.state.user}! 🥳`)
+      Alert.alert(`Compra efetuada.\nObrigado, ${user.name}! 🥳`)
     } catch (error) {
       Alert.alert(`Ocorreu um erro ao confirmar a compra. 🤕`)
     } finally {
@@ -61,18 +53,20 @@ export default class Confirmation extends Component {
 
   renderItem = ({ item }) => (
     <ListItem
-      title={ item.product }
+      title={ item.name }
       subtitle={ parsePrice(item.price) }
     />
   )
 
   render() {
-    const { data } = this.state
+    const { user, product } = this.state
 
     return (
       <View style={{ flex: 1 }}>
+        <UserBar user={user} />
+
         <FlatList
-          data={data}
+          data={[product]}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
@@ -85,7 +79,7 @@ export default class Confirmation extends Component {
 
         <View>
           <Button
-            title="Confirmar"
+            title="Comprar"
             onPress={this.handleConfirm}
             disabled={this.state.isActivityIndicatorAnimating}
           />

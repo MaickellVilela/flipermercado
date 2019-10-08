@@ -16,7 +16,7 @@ export default class Home extends Component {
 
   async componentWillMount() {
     const users = await fetchUsers()
-    const { products } = await fetchProducts()
+    const products = await fetchProducts()
 
     this.props.navigation.setParams({
       isLoading: false,

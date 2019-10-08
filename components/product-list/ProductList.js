@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 
 import { ListItem } from 'react-native-elements'
+import { UserBar } from '../../components'
 
 import { parsePrice } from '../../helpers/currency'
 
@@ -10,21 +11,29 @@ export default class ProductList extends Component {
     title: 'Produtos'
   }
 
+  constructor(props) {
+    super(props)
+
+    const { navigation } = this.props
+
+    this.state = {
+      user: navigation.getParam('user'),
+      products: navigation.getParam('products')
+    }
+  }
+
   keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => {
-    const userName = this.props.navigation.getParam('userName')
-
     return (
       <ListItem
         button
-        title={item[0]}
-        subtitle={ parsePrice(item[1]) }
+        title={item.name}
+        subtitle={ parsePrice(item.price) }
         onPress={() => {
           this.props.navigation.navigate('Confirmation', {
-            userName: userName,
-            productName: item[0],
-            productPrice: item[1],
+            user: this.state.user,
+            product: item,
           })
         }}
       />
@@ -32,15 +41,18 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { navigation } = this.props
-    const products = navigation.getParam('products')
+    const { user, products } = this.state
 
     return (
-      <FlatList
-        keyExtractor={this.keyExtractor}
-        data={products}
-        renderItem={this.renderItem}
-      />
+      <View>
+        <UserBar user={user} />
+
+        <FlatList
+          keyExtractor={this.keyExtractor}
+          data={products}
+          renderItem={this.renderItem}
+        />
+      </View>
     )
   }
 }

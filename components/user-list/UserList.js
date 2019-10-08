@@ -14,6 +14,7 @@ export default class UserList extends Component {
       products: props.navigation.getParam('products'),
     }
   }
+
   keyExtractor = (_, index) => index.toString()
 
   renderItem = ({ item }) => (
@@ -23,7 +24,7 @@ export default class UserList extends Component {
       leftAvatar={{ source: { uri: item.avatar } }}
       onPress={() => {
         this.props.navigation.navigate('ProductList', {
-          userName: item.name,
+          user: item,
           products: this.state.products,
         })
       }}

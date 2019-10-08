@@ -7,7 +7,7 @@ import { Platform, Image, StyleSheet } from 'react-native'
 import logo from './assets/logo.png'
 
 import Home from './Home'
-import { UserList, ProductList, Confirmation } from './components'
+import { ProductList, Confirmation } from './components'
 
 const AppNavigator = createStackNavigator(
   {
@@ -17,7 +17,6 @@ const AppNavigator = createStackNavigator(
         isLoading: true,
       },
     },
-    UserList: { screen: UserList },
     ProductList: { screen: ProductList },
     Confirmation: { screen: Confirmation },
   },
