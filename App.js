@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import AppNavigator from './AppNavigator'
-
+import React, { PureComponent } from 'react'
 import { ThemeProvider } from 'react-native-elements'
 
-import theme from './themes/default'
+import AppNavigator from './AppNavigator'
+import { theme } from './themes/default'
 
-export default class App extends Component {
+export default class App extends PureComponent {
   render() {
     return (
       <ThemeProvider theme={theme}>

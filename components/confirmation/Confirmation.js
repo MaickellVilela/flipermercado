@@ -1,32 +1,42 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { View, FlatList, ActivityIndicator, Alert } from 'react-native'
+import {
+  ActivityIndicator, Alert, FlatList, View,
+} from 'react-native'
 import { Button, ListItem } from 'react-native-elements'
 
-import { UserBar } from '../../components'
-
 import { createTransaction } from '../../helpers/actions'
-import { currentDate } from '../../helpers/time'
 import { parsePrice } from '../../helpers/currency'
+import { currentDate } from '../../helpers/time'
+import UserBar from '../user-bar'
 import styles from './styles'
 
 export default class Confirmation extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Carrinho'
-  })
+  static navigationOptions() {
+    return {
+      title: 'Carrinho',
+    }
+  }
 
   constructor(props) {
     super(props)
 
-    const { navigation } = this.props
+    this.state = { isActivityIndicatorAnimating: false }
 
-    this.state = {
-      user: navigation.getParam('user'),
-      product: navigation.getParam('product'),
-      isActivityIndicatorAnimating: false,
-    }
+    this.handleConfirm = this.handleConfirm.bind(this)
   }
 
-  handleConfirm = async () => {
+  componentWillMount() {
+    const { navigation } = this.props
+
+    const user = navigation.getParam('user')
+    const product = navigation.getParam('product')
+
+    this.setState({ user, product })
+  }
+
+  async handleConfirm() {
+    const { navigation } = this.props
     const { user, product } = this.state
 
     this.setState({ isActivityIndicatorAnimating: true })
@@ -41,25 +51,25 @@ export default class Confirmation extends Component {
 
       Alert.alert(`Compra efetuada.\nObrigado, ${user.name}! 🥳`)
     } catch (error) {
-      Alert.alert(`Ocorreu um erro ao confirmar a compra. 🤕`)
+      Alert.alert('Ocorreu um erro ao confirmar a compra. 🤕')
     } finally {
       this.setState({ isActivityIndicatorAnimating: false })
 
-      this.props.navigation.popToTop()
+      navigation.popToTop()
     }
   }
 
-  keyExtractor = (_, index) => index.toString()
+  keyExtractor(_, index) {
+    return index.toString()
+  }
 
-  renderItem = ({ item }) => (
-    <ListItem
-      title={ item.name }
-      subtitle={ parsePrice(item.price) }
-    />
-  )
+  renderItem({ item }) {
+    return <ListItem title={item.name} subtitle={parsePrice(item.price)} />
+  }
 
   render() {
-    const { user, product } = this.state
+    const { navigation } = this.props
+    const { user, product, isActivityIndicatorAnimating } = this.state
 
     return (
       <View style={{ flex: 1 }}>
@@ -72,26 +82,30 @@ export default class Confirmation extends Component {
         />
 
         <View style={styles.whiteOverlay}>
-          { this.state.isActivityIndicatorAnimating &&
-            ( <ActivityIndicator animating size='large' /> )
-          }
+          {isActivityIndicatorAnimating && (
+            <ActivityIndicator animating size="large" />
+          )}
         </View>
 
         <View>
           <Button
             title="Comprar"
             onPress={this.handleConfirm}
-            disabled={this.state.isActivityIndicatorAnimating}
+            disabled={isActivityIndicatorAnimating}
           />
 
           <Button
             type="outline"
             title="Cancelar"
-            onPress={ () => this.props.navigation.popToTop() }
-            disabled={this.state.isActivityIndicatorAnimating}
+            onPress={() => navigation.popToTop()}
+            disabled={isActivityIndicatorAnimating}
           />
         </View>
       </View>
     )
   }
+}
+
+Confirmation.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }

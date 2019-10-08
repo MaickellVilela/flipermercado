@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { SectionList, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
@@ -13,41 +14,59 @@ export default class UserList extends Component {
       users: props.navigation.getParam('users'),
       products: props.navigation.getParam('products'),
     }
+
+    this.renderItem = this.renderItem.bind(this)
   }
 
-  keyExtractor = (_, index) => index.toString()
+  keyExtractor(_, index) {
+    return index.toString()
+  }
 
-  renderItem = ({ item }) => (
-    <ListItem
-      button
-      title={item.name}
-      leftAvatar={{ source: { uri: item.avatar } }}
-      onPress={() => {
-        this.props.navigation.navigate('ProductList', {
-          user: item,
-          products: this.state.products,
-        })
-      }}
-    />
-  )
-
-  sectionData = () => {
+  sectionData() {
     const { users } = this.state
 
     const sections = createSectionData(users)
 
-    return sections.filter(section => section.data.length !== 0)
+    return sections.filter((section) => section.data.length !== 0)
   }
 
-  render = () => (
-    this.state.users &&
-    <SectionList
-      sections={this.sectionData()}
-      keyExtractor={this.keyExtractor}
-      renderItem={this.renderItem}
-      renderSectionHeader={({ section: { title } }) => (
-        <Text style={styles.sectionHeader}>{ title }</Text>
-      )}
-    />
-  )
+  renderItem({ item }) {
+    const { navigation } = this.props
+    const { products } = this.state
+
+    return (
+      <ListItem
+        button
+        title={item.name}
+        leftAvatar={{ source: { uri: item.avatar } }}
+        onPress={() => {
+          navigation.navigate('ProductList', {
+            user: item,
+            products,
+          })
+        }}
+      />
+    )
+  }
+
+  render() {
+    const { users } = this.state
+
+    return (
+      users && (
+        <SectionList
+          sections={this.sectionData()}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.sectionHeader}>{title}</Text>
+          )}
+        />
+      )
+    )
+  }
+}
+
+UserList.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }

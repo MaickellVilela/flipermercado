@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { UserList, Splash } from './components'
 
-import { fetchUsers, fetchProducts } from './helpers/actions'
+import { Splash, UserList } from './components'
+import { fetchProducts, fetchUsers } from './helpers/actions'
 
 export default class Home extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions({ navigation }) {
     if (navigation.getParam('isLoading')) {
       return { header: null }
     }
@@ -12,24 +13,28 @@ export default class Home extends Component {
     return { title: 'Flipermercado' }
   }
 
-  isLoading = () => this.props.navigation.getParam('isLoading')
-
   async componentWillMount() {
+    const { navigation } = this.props
+
     const users = await fetchUsers()
     const products = await fetchProducts()
 
-    this.props.navigation.setParams({
-      isLoading: false,
-      users: users,
-      products: products
-    })
+    navigation.setParams({ users, products, isLoading: false })
   }
 
-  render = () => (
-    this.isLoading() ? (
-      <Splash />
-    ) : (
-      <UserList navigation={this.props.navigation} />
-    )
-  )
+  isLoading() {
+    const { navigation } = this.props
+
+    return navigation.getParam('isLoading')
+  }
+
+  render() {
+    const { navigation } = this.props
+
+    return this.isLoading() ? <Splash /> : <UserList navigation={navigation} />
+  }
+}
+
+Home.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }

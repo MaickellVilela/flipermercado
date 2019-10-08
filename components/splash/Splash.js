@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
-import { View, Image } from 'react-native'
-
-import styles from './styles'
+import React, { PureComponent } from 'react'
+import { Image, View } from 'react-native'
 
 import logo from '../../assets/logo.png'
+import styles from './styles'
 
-export default class Splash extends Component {
-  render = () => (
-    <View style={styles.container}>
-      <Image source={logo} />
-    </View>
-  )
+export default class Splash extends PureComponent {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image source={logo} />
+      </View>
+    )
+  }
 }
