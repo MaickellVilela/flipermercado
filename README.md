@@ -1,6 +1,6 @@
-# Flipermercado
+# Flipermercado [![Build Status](https://travis-ci.org/izn/flipermercado.svg?branch=master)](https://travis-ci.org/izn/flipermercado)
 
-Flipermercado is an all-new react native project. Its high-throughput in-place user list helps users buy stuff in exchange for actual **MONEY** (usually in BRL). With it, you'll be able to control your small shop using blazingly fast high-dynamic-range API requests to __GOOGLE-SCRIPTS__ :fish: :octopus:! 
+Flipermercado is an all-new react native project. Its high-throughput in-place user list helps users buy stuff in exchange for actual **MONEY** (usually in BRL). With it, you'll be able to control your small shop using blazingly fast high-dynamic-range API requests to __GOOGLE-SCRIPTS__ :fish: :octopus:!
 
 ## DEV environment
 
