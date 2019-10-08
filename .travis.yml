@@ -1,0 +1,8 @@
+language: node_js
+cache:
+  directories:
+    - "node_modules"
+before_install:
+  - "cp config.sample.js config.js"
+script:
+  - "yarn lint"
