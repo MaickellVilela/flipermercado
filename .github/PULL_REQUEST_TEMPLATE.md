@@ -1,17 +1,13 @@
-## Descrição
+## Proposed Changes
 
-<!-- Explicar sobre seu PR e quais mudanças foram feitas -->
+<!-- changes' description -->
 
 ### :camera:
 
-<!-- Caso houver alterações visuais, apresentar uma captura de tela mostrando -->
+<!-- features' screenshot -->
 
-### Issues relacionadas
-
-<!-- Adicionar o número da issue que será fechada referente as mudanças do PR -->
+### Related issues
 
 Resolve #
 
-### Informações adicionais
-
-<!-- Inserir outras informações -->
+### Additional information
