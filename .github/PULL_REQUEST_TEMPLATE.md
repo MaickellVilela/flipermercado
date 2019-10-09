@@ -6,6 +6,8 @@
 
 <!-- features' screenshot -->
 
+### How to test
+
 ### Related issues
 
 Resolve #
