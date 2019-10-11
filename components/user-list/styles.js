@@ -1,14 +1,25 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  sectionHeader: {
-    paddingTop: 0,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 0,
-    fontSize: 16,
+  item: {
+    flexGrow: 1,
+    flexBasis: 0,
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 30,
+  },
+  avatarContainer: {
+    flexGrow: 1,
+    flexBasis: 0,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  nameLabel: {
+    color: '#FC0A7E',
     fontWeight: 'bold',
-    color: '#FFF',
-    backgroundColor: '#FC0A7E',
+    textAlign: 'center',
+    fontSize: 18,
+    lineHeight: 22,
+    marginTop: 8,
   },
 })
