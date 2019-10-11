@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
-  FlatList, Text, TouchableOpacity, View
+  FlatList, Text, TouchableOpacity, View,
 } from 'react-native'
 import { Avatar } from 'react-native-elements'
 
