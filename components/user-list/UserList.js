@@ -36,7 +36,7 @@ export default class UserList extends Component {
         <View style={styles.avatarContainer}>
           <Avatar
             rounded
-            size={120}
+            size="large"
             source={{
               uri: item.avatar,
             }}
